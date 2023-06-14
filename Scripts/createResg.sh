@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# A script that will create a resource group in Azure and install an Ubuntu VM into it
+# A script that creates a resource group in Azure and offers an installation of an Ubuntu VM into it
 
 setup() {
     # Install az cli
@@ -50,7 +50,6 @@ check_resource_group () {
     done
 }
 
-
 # Create the resource group
 create_resource_group () {
     echo "Creating resource group: $resource_group in $selected_region"
@@ -89,24 +88,17 @@ vm_creation_answer() {
 	fi
 }
 
-
 # Prompts user to name their new VM and proceeds to create one with set parameters
 
 vm_letsdothis() {
 	if [ "$createvm" = "yes" ]; then
 		read -p "Enter a name for your new VM :  " vmname
 		read -p "Enter an Admin username for your new VM" adminuser
-		read -p "Enter a password" adminpass
+		read -p "Enter a password" adminpass  #TODO implement logic for Microsoft pw requirements
 		az vm create --resource-group $resource_group --name $vmname --image UbuntuLTS --admin-username $adminuser --admin-password $adminpass
 		echo "Thank you, please wait . . . "
 	fi
 }
-
-
-
-
-
-
 
 #setup
 check_region
